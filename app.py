@@ -479,7 +479,9 @@ You must:
    - pandas, numpy, matplotlib available
    - A helper function `plot_to_base64(max_bytes=100000)` for generating base64-encoded images under 100KB.
 5. When returning plots, always use `plot_to_base64()` to keep image sizes small.
-6. Make sure all variables are defined before use, and the code can run without any undefined references.
+6. For bar charts: set `color="blue"` and always label both axes with `set_xlabel` and `set_ylabel`.
+7. For line charts: set `color="red"` and always label both axes with `set_xlabel` and `set_ylabel`.
+8. Make sure all variables are defined before use, and the code can run without any undefined references.
 """),
     ("human", "{input}"),
     MessagesPlaceholder(variable_name="agent_scratchpad"),
@@ -643,6 +645,8 @@ async def analyze_data(request: Request):
                 '   - "questions": [ ... original question strings ... ]\n'
                 '   - "code": "..."  (Python code that fills `results` with exact question strings as keys)\n'
                 "5) For plots: use plot_to_base64() helper to return base64 image data under 100kB.\n"
+                "6) For bar charts: set `color='blue'` and always label both axes with `set_xlabel` and `set_ylabel`.\n"
+                "7) For line charts: set `color='red'` and always label both axes with `set_xlabel` and `set_ylabel`.\n"
             )
         else:
             llm_rules = (
